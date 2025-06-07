@@ -32,6 +32,9 @@ KumoChat is a secure internal chat system that facilitates private, group, and b
 - **Access Control**:
   - Role-based access control (User, Leader, Admin)
 
+## You can see the results in the report folder: images included already!
+or scroll down to run it on your local machine.
+
 ## Getting Started
 
 To run KumoChat locally, follow these steps:
@@ -51,5 +54,3 @@ To run KumoChat locally, follow these steps:
     cd ../frontend
     npm install
     npm start
-
-## You can also see the results in the report folder: images included already!
