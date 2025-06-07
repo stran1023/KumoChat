@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  isApproved   Boolean  @default(false)
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+
+  keys             KeyPair?
+  departments      UserDepartment[]
+  groupKeyShares   GroupKeyShare[]
+  messagesSent     Message[]        @relation("SentMessages")
+  messagesReceived Message[]        @relation("ReceivedMessages")
+  loginLogs        LoginLog[]
+
+  ledDepartments     Department[]      @relation("LeaderRelation")
+  createdDepartments Department[]      @relation("CreatorRelation")
+  encryptedAESKeys   EncryptedAESKey[]
+}
+
+model KeyPair {
+  id               String @id @default(uuid())
+  userId           String @unique
+  publicKey        String
+  encryptedPrivKey String
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Department {
+  id          String  @id @default(uuid())
+  name        String
+  leaderId    String?
+  createdById String?
+
+  leader    User? @relation("LeaderRelation", fields: [leaderId], references: [id])
+  createdBy User? @relation("CreatorRelation", fields: [createdById], references: [id])
+
+  users          UserDepartment[]
+  messages       Message[]
+  groupKeyShares GroupKeyShare[]
+}
+
+model UserDepartment {
+  id           String @id @default(uuid())
+  userId       String
+  departmentId String
+
+  user       User       @relation(fields: [userId], references: [id])
+  department Department @relation(fields: [departmentId], references: [id])
+
+  @@unique([userId, departmentId])
+}
+
+model GroupKeyShare {
+  id           String @id @default(uuid())
+  userId       String
+  departmentId String
+  encryptedKey String
+
+  user       User       @relation(fields: [userId], references: [id])
+  department Department @relation(fields: [departmentId], references: [id])
+
+  @@unique([userId, departmentId])
+}
+
+model Message {
+  id           String  @id @default(uuid())
+  senderId     String
+  receiverId   String?
+  departmentId String?
+
+  encryptedContent String
+  isBroadcast      Boolean  @default(false)
+  fileUrl          String?
+  sentAt           DateTime @default(now())
+
+  sender           User              @relation("SentMessages", fields: [senderId], references: [id])
+  receiver         User?             @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  department       Department?       @relation(fields: [departmentId], references: [id])
+  encryptedAESKeys EncryptedAESKey[]
+}
+
+model EncryptedAESKey {
+  id        String @id @default(uuid())
+  messageId String
+  userId    String
+  aesKey    String // đã mã hóa bằng publicKey tương ứng
+
+  message Message @relation(fields: [messageId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@unique([messageId, userId]) // mỗi user chỉ có 1 key cho 1 message
+}
+
+model LoginLog {
+  id        String   @id @default(uuid())
+  userId    String
+  action    Action
+  timestamp DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  LEADER
+  ADMIN
+}
+
+enum Action {
+  LOGIN
+  LOGOUT
+}
