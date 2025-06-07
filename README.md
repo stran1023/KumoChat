@@ -52,4 +52,4 @@ To run KumoChat locally, follow these steps:
     npm install
     npm start
 
-##You can also see the results in the report folder: images included already!
+## You can also see the results in the report folder: images included already!
