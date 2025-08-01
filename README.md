@@ -33,20 +33,12 @@ Quản trị viên có thể phê duyệt tài khoản, tạo phòng ban và ph�
 
 ---
 
-## 📌 Flow E2EE
-
-<p align="center">
-  <img src="report/Kich ban.png" alt="Flow E2EE" width="700"/>
-</p>
-
----
-
-<h3>🖥️ Giao diện Dashboard (Admin)</h3>
+<h3>🖥️ Giao diện của Admin</h3>
 <p align="center">
   <img src="report/admin.png" alt="Admin dashboard" width="700"/>
 </p>
 
-<h3>🖥️ Giao diện Dashboard (User)</h3>
+<h3>🖥️ Giao diện của User</h3>
 <p align="center">
   <img src="report/user.png" alt="User dashboard" width="700"/>
 </p>
@@ -56,7 +48,7 @@ Quản trị viên có thể phê duyệt tài khoản, tạo phòng ban và ph�
   <img src="report/chat.png" alt="chat" width="700"/>
 </p>
 
-<h3>🖥️ Kiểm tra file upload</h3>
+<h3>🖥️ Giao diện kiểm tra file upload</h3>
 <p align="center">
   <img src="report/check_malware_file.png" alt="checkfile" width="700"/>
 </p>
@@ -75,7 +67,11 @@ Quản trị viên có thể phê duyệt tài khoản, tạo phòng ban và ph�
 ## 🔐 Các tính năng bảo mật
 
 - **Xác thực**: JSON Web Token (JWT)  
-- **Mã hóa đầu cuối**: AES (dữ liệu) + RSA (trao đổi khóa)  
+- **Mã hóa đầu cuối**: AES (dữ liệu) + RSA (trao đổi khóa) + SHA (đảm bảo toàn vẹn dữ liệu)
+<p align="center">
+  <img src="report/Kich ban.png" alt="Flow E2EE" width="700"/>
+</p>
+
 - **Quét tệp**: ClamAV và VirusTotal tích hợp  
 
 ---
