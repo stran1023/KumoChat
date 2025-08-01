@@ -1,6 +1,6 @@
 <h1 align="center">💬 KumoChat – Hệ thống trò chuyện nội bộ mã hóa đầu cuối</h1>
 
-<p align="center">
+<p align="left">
   <em>Đây là đồ án cá nhân trong môn Đồ án Mã hóa Ứng dụng & An ninh Thông tin. Thực hiện trong 2 tháng (lên ý tưởng, thiết kế, triển khai và thử nghiệm).</em><br>
 </p>
 
