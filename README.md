@@ -104,8 +104,8 @@ Bạn có thể xem báo cáo chi tiết và ảnh chụp màn hình trong thư 
 ## 🚀 Khởi chạy ứng dụng cục bộ
 ```bash
 1. Clone repo
-  git clone https://github.com/yourusername/kumochat.git
-  cd kumochat
+    git clone https://github.com/yourusername/kumochat.git
+    cd kumochat
 
 2. Backend setup
     cd backend
